@@ -1,0 +1,34 @@
+To do a todolist app we need:
+
+- Two features
+
+// features #region
+We need two features initially:
+1- Todos
+2- Filters
+
+// todos #region
+We need some features also:
+1- Adding todos
+2- Toggling todos
+3- Deleting todos
+4- Changing each todo relating color
+
+// filters #region
+We need the following features:
+We should filter based on the filter status:
+There are three statuses that we can filter based on them:
+- All
+- Completed
+- Active
+
+// Possible action types #region
+Todos:
+todos/todoAdded --> payload: added
+todos/todoToggled --> payload: toggled
+todos/todoDeleted --> payload: deleted
+todos/todoColorChanged --> payload: colorChanged
+
+Filters:
+filters/filterStatusChanged --> payload: statusChanged
+filters/filterColorsChanged --> payload: colorsChanged

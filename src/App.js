@@ -1,4 +1,5 @@
 import React from 'react'
+import store from './store'
 
 function App() {
   return (
@@ -18,5 +19,12 @@ function App() {
     </div>
   )
 }
-
+store.dispatch({
+  type: 'todos/todoAdded'
+})
+store.dispatch({
+  type: 'todos/todoToggled',
+  payload: 0
+})
+console.log(store.getState())
 export default App
