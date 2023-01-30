@@ -1,8 +1,8 @@
-export const sayHiOnDispatch = (createStore) => {
-  return (rootReducer, preloadedState, enhancers) => {
+export const sayHiOnDispatch =
+  createStore => (rootReducer, preloadedState, enhancers) => {
     const store = createStore(rootReducer, preloadedState, enhancers)
 
-    function newDispatch(action) {
+    function newDispatch (action) {
       const result = store.dispatch(action)
       console.log('Hi!')
       return result
@@ -10,19 +10,38 @@ export const sayHiOnDispatch = (createStore) => {
 
     return { ...store, dispatch: newDispatch }
   }
-}
 
-export const includeMeaningOfLife = (createStore) => {
+export const includeMeaningOfLife = createStore => {
   return (rootReducer, preloadedState, enhancers) => {
     const store = createStore(rootReducer, preloadedState, enhancers)
 
-    function newGetState() {
+    function newGetState () {
       return {
         ...store.getState(),
-        meaningOfLife: 42,
+        meaningOfLife: 42
       }
     }
 
     return { ...store, getState: newGetState }
   }
 }
+
+export const myCustomEnhancer =
+  createStore => (rootReducer, preloadedState, enhancers) => {
+    const store = createStore(rootReducer, preloadedState, enhancers)
+
+    function newDispatch (action) {
+      const result = store.dispatch(action)
+      console.log("This is the custom enhancer that I've wrote my self")
+      return result
+    }
+
+    function newState () {
+      return {
+        ...store.getState(),
+        projectOwner: 'Khaled Hajij'
+      }
+    }
+
+    return { ...store, dispatch: newDispatch, getState: newState }
+  }

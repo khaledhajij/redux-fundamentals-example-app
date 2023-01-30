@@ -8,12 +8,17 @@ const todosReducer = (state = initialState, action) => {
     case 'todos/todoAdded':
       return [
         ...state,
-        { description: action.payload, status: false, id: ++idCounter }
+        {
+          description: action.payload,
+          status: false,
+          id: ++idCounter,
+          color: ''
+        }
       ]
     case 'todos/todoToggled':
       return [
         ...state.map(todo =>
-          todo?.id === action.payload ? {...todo, status: !todo.status} : todo
+          todo?.id === action.payload ? { ...todo, status: !todo.status } : todo
         )
       ]
     case 'todos/todoDeleted':

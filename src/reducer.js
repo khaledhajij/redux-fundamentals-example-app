@@ -7,5 +7,4 @@ const reducer = combineReducers({
   filters: filtersReducer
 })
 
-
 export default reducer

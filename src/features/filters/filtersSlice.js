@@ -17,21 +17,22 @@ const filtersReducer = (state = initialState, action) => {
         status: action.payload
       }
     case 'filters/colorsChanged':
-      switch (action.payload.changeType) {
+      let { color, changeType } = action.payload
+      const { colors } = state
+      switch (changeType) {
         case 'added':
-          if (state.colors.includes(action.payload.color)) {
+          if (colors.includes(color)) {
             return state
           } else {
             return {
               ...state,
-              colors: [...state.filters.colors, action.payload.color]
+              colors: [...colors, color]
             }
           }
         case 'removed':
-          const removedColorIndex = state.colors.indexOf(action.payload.color)
           return {
             ...state,
-            colors: [...state.filters.colors].splice(removedColorIndex, 1)
+            colors: [...colors].filter(col => col.color === color )
           }
         // eslint-disable-next-line no-fallthrough
         default:
