@@ -15,8 +15,10 @@ const RemainingTodos = ({ count }) => {
 }
 
 const StatusFilter = ({ value: status, onChange }) => {
+  console.log('status',status)
   const renderedFilters = Object.keys(StatusFilters).map(key => {
     const value = StatusFilters[key]
+    console.log('value',value)
     const handleClick = () => onChange(value)
     const className = value === status ? 'selected' : ''
 
@@ -76,7 +78,8 @@ const Footer = () => {
   const dispatch = useDispatch()
   const colors = useSelector(state => state.filters.colors)
   const status = StatusFilters.All
-  const todosRemaining = useSelector(state => state.todos).length
+  const todos = useSelector(state => state.todos)
+  const todosRemaining = todos.length
 
   const onColorChange = (color, changeType) => {
     dispatch({
@@ -85,16 +88,29 @@ const Footer = () => {
     })
     console.log('Color change: ', { color, changeType })
   }
-  const onStatusChange = status => console.log('Status change: ', status)
+  const onStatusChange = e => {
+    dispatch({ type: 'filters/statusChanged', payload: e })
+  }
+
+  const handleAllCompletion = () => {
+    dispatch({ type: 'todos/onMarkCompletedClicked' })
+  }
+
+  const onClearCompletedClicked = () => {
+    dispatch({ type: 'todos/completedCleared' })
+  }
 
   return (
     <footer className='footer'>
       <div className='actions'>
         <h5>Actions</h5>
-        <button className='button'>Mark All Completed</button>
-        <button className='button'>Clear Completed</button>
+        <button className='button' onClick={handleAllCompletion}>
+          Mark All Completed
+        </button>
+        <button className='button' onClick={onClearCompletedClicked}>
+          Clear Completed
+        </button>
       </div>
-
       <RemainingTodos count={todosRemaining} />
       <StatusFilter value={status} onChange={onStatusChange} />
       <ColorFilters value={colors} onChange={onColorChange} />

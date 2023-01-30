@@ -33,9 +33,6 @@ function App () {
     </div>
   )
 }
-const unsubscribe = store.subscribe(() =>
-  console.log('State after dispatch: ', store.getState())
-)
 store.dispatch({
   type: 'todos/todoAdded',
   payload: 'Study redux'
@@ -48,26 +45,4 @@ store.dispatch({
   type: 'todos/todoToggled',
   payload: 0
 })
-store.dispatch({
-  type: 'filters/statusChanged',
-  payload: StatusFilters.Active
-})
-unsubscribe()
-store.dispatch({
-  type: 'filters/colorsChanged',
-  payload: { color: 'red', changeType: 'added' }
-})
-store.dispatch({
-  type: 'filters/colorsChanged',
-  payload: { color: 'red', changeType: 'added' }
-})
-store.dispatch({
-  type: 'filters/colorsChanged',
-  payload: { color: 'purple', changeType: 'removed' }
-})
-store.dispatch({
-  type: 'filters/colorsChanged',
-  payload: { color: 'purple', changeType: 'removed' }
-})
-console.log(store.getState())
 export default App

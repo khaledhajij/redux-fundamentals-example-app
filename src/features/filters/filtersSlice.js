@@ -32,7 +32,7 @@ const filtersReducer = (state = initialState, action) => {
         case 'removed':
           return {
             ...state,
-            colors: [...colors].filter(col => col.color === color )
+            colors: [...colors].filter(col => col !== color )
           }
         // eslint-disable-next-line no-fallthrough
         default:
