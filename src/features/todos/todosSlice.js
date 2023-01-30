@@ -1,8 +1,8 @@
-import { StatusFilters } from '../filters/filtersSlice'
+import { client } from '../../api/client'
 
 const initialState = []
 
-let idCounter = -1
+let idCounter = 4
 
 const todosReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -10,7 +10,7 @@ const todosReducer = (state = initialState, action) => {
       return [
         ...state,
         {
-          description: action.payload,
+          text: action.payload,
           status: 'active',
           id: ++idCounter,
           color: ''
@@ -42,9 +42,17 @@ const todosReducer = (state = initialState, action) => {
       })
     case 'todos/completedCleared':
       return [...state].filter(todo => todo.status === 'active')
+    case 'todos/todosLoaded':
+      return [...action.payload].map(todo => {
+        return { ...todo, status: 'active' }
+      })
     default:
       return state
   }
 }
 
+export async function fetchTodos (dispatch, getState) {
+  const response = await client.get('/fakeApi/todos')
+  dispatch({ type: 'todos/todosLoaded', payload: response.todos })
+}
 export default todosReducer

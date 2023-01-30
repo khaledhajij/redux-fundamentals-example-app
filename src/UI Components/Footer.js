@@ -15,10 +15,8 @@ const RemainingTodos = ({ count }) => {
 }
 
 const StatusFilter = ({ value: status, onChange }) => {
-  console.log('status',status)
   const renderedFilters = Object.keys(StatusFilters).map(key => {
     const value = StatusFilters[key]
-    console.log('value',value)
     const handleClick = () => onChange(value)
     const className = value === status ? 'selected' : ''
 

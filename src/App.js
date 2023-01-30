@@ -1,5 +1,4 @@
 import React from 'react'
-import { StatusFilters } from './features/filters/filtersSlice'
 import store from './store'
 import Footer from './UI Components/Footer'
 import Header from './UI Components/Header'
@@ -11,7 +10,6 @@ function App () {
       <nav>
         <section>
           <h1>Redux Fundamentals Example</h1>
-
           <div className='navContent'>
             <div className='navLinks'></div>
           </div>

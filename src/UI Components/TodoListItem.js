@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 const TodoListItem = ({ todo }) => {
   const dispatch = useDispatch()
-  const {description, status, color } = todo
+  const {text, status, color } = todo
 
   const handleCompletedChanged = () => {
     dispatch({ type: 'todos/todoToggled', payload: todo.id })
@@ -38,7 +38,7 @@ const TodoListItem = ({ todo }) => {
             checked={status === 'completed'}
             onChange={handleCompletedChanged}
           />
-          <div className='todo-text'>{description}</div>
+          <div className='todo-text'>{text}</div>
         </div>
         <div className='segment buttons'>
           <select

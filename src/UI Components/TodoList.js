@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import TodoListItem from './TodoListItem'
-import store from '../store'
 
 const TodoList = () => {
   const colors = useSelector(state => state.filters.colors)
@@ -15,16 +14,17 @@ const TodoList = () => {
             : todo.status === 'completed'
         )
   )
-  console.log(todosFilByStatus)
   const todos = colors.length
     ? todosFilByStatus.filter(todo => colors.includes(todo?.color))
     : todosFilByStatus
 
-  const renderedListItems = todos.map(todo => {
-    return <TodoListItem key={todo?.id} todo={todo} />
-  })
-
-  return <ul className='todo-list'>{renderedListItems}</ul>
+  return (
+    <ul className='todo-list'>
+      {todos.map(todo => (
+        <TodoListItem key={todo?.id} todo={todo} />
+      ))}
+    </ul>
+  )
 }
 
 export default TodoList
